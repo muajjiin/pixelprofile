@@ -1,6 +1,10 @@
 // src/App.js
 import React from "react";
 import Prism from "./components/Backgrounds/Prism/Prism";
+import BlurText from './components/text/BlurText/BlurText';
+
+
+
 
 function App() {
   return (
@@ -21,13 +25,35 @@ function App() {
         <Prism />
       </div>
 
-      {/* Main content */}
-      <div style={{ position: "relative", zIndex: 1, color: "white", textAlign: "center", paddingTop: "50px" }}>
-        <h1>Welcome to PixelProfile</h1>
-        <p>This is your portfolio content over Prism background</p>
-      </div>
-    </div>
+     {/* Main content */}
+   <div
+      style={{
+       position: "relative",
+    width: "100vw",
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    padding: "2rem" , 
+      }}
+    >
+      <BlurText
+        text="Ideas, executed beautifully."
+        style={{
+
+    fontSize: "clamp(2.5rem, 7vw, 4rem)",   // responsive size
+    fontWeight: "700",
+    fontFamily: "'Great Vibes', 'cursive'", // cursive font
+    textAlign: "center",
+    textShadow: "2px 2px 6px rgba(0,0,0,0.2)"
+        }}
+      />
+    </div> 
+  </div>
   );
 }
+
+
 
 export default App;

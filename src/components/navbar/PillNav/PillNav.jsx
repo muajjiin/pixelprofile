@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import "./PillNav.css";
 
+
 const PillNav = ({
   logo,
-  logoAlt = "Logo",
+ 
   items,
   activeHref,
   className = "",
@@ -22,8 +23,6 @@ const PillNav = ({
   const circleRefs = useRef([]);
   const tlRefs = useRef([]);
   const activeTweenRefs = useRef([]);
-  const logoImgRef = useRef(null);
-  const logoTweenRef = useRef(null);
   const hamburgerRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const navItemsRef = useRef(null);
@@ -154,7 +153,7 @@ const PillNav = ({
     });
   };
 
-  const handleLogoEnter = () => {
+  /*const handleLogoEnter = () => {
     const img = logoImgRef.current;
     if (!img) return;
     logoTweenRef.current?.kill();
@@ -165,7 +164,7 @@ const PillNav = ({
       ease,
       overwrite: "auto",
     });
-  };
+  };*/
 
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -242,7 +241,9 @@ const PillNav = ({
         aria-label="Primary"
         style={cssVars}
       >
-        {isRouterLink(items?.[0]?.href) ? (
+       
+       
+       {   /*  {isRouterLink(items?.[0]?.href) ? (
           <Link
             className="pill-logo"
             to={items[0].href}
@@ -253,7 +254,6 @@ const PillNav = ({
               logoRef.current = el;
             }}
           >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
           </Link>
         ) : (
           <a
@@ -265,9 +265,9 @@ const PillNav = ({
               logoRef.current = el;
             }}
           >
-            <img src={logo} alt={logoAlt} ref={logoImgRef} />
+          
           </a>
-        )}
+        )}*/}
 
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">

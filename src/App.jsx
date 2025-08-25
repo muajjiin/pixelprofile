@@ -1,20 +1,25 @@
 // src/App.js
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Prism from "./components/Backgrounds/Prism/Prism";
 import BlurText from './components/text/BlurText/BlurText';
 import PillNav from './components/navbar/PillNav/PillNav'; // Import your navbar
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Portfolio from "./pages/Portfolio";
+import Contact from "./pages/Contact";
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
+  { label: "Services", href: "/portfolio" },
   { label: "Contact", href: "/contact" },
 ];
 
 
 function App() {
   return (
-    <div style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       {/* Prism background */}
       <div
         style={{
@@ -34,8 +39,10 @@ function App() {
       <div
         style={{
           position: "relative",
-          width: "100vw",
-          height: "100vh",
+          width: "100%",
+          height: "100%",
+          minHeight: "100vh",
+          flexDirection: "column",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -56,22 +63,26 @@ function App() {
       </div>
 
        <div className="App">
+    
+      </div>
       <PillNav
-        logo={null}
-        items={navItems}          // <-- navItems is now defined
+        
+        items={navItems}
         activeHref="/"
         baseColor="#fff"
         pillColor="#060010"
-        hoveredPillTextColor="#ff6a00"
+        hoveredPillTextColor="#0fa4cdff"
         pillTextColor="#fff"
       />
 
-      {/* Example main content */}
-      <div style={{ padding: "2rem", textAlign: "center" }}>
-        <h1>Welcome to My Website</h1>
-        <p>Your main content goes here.</p>
+      <div style={{ paddingTop: "5rem", width: "100%" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
-    </div>
     </div>
   );
 }

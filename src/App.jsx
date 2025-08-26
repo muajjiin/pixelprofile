@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import BlurText from './components/text/BlurText/BlurText';
 import PillNav from './components/navbar/PillNav/PillNav';
+import BackgroundWrapper from "./components/Backgrounds/BackgroundWrapper";
 
 // Lazy load pages and Prism/LogoLoop
 const Home = React.lazy(() => import("./pages/Home"));
@@ -21,8 +22,8 @@ const navItems = [
 
 function App() {
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-      {/* Prism background (lazy loaded) */}
+    <div className="app-wrapper" style={{ width: "100%", minHeight: "100vh", position: "relative", overflow: "hidden" }}>
+      <BackgroundWrapper />
       <Suspense fallback={<div style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1, background: "#222"}} />}>
         <div
           style={{
@@ -40,21 +41,26 @@ function App() {
         </div>
       </Suspense>
 
-      {/* Main content */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          minHeight: "100vh",
-          flexDirection: "column",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          overflow: "hidden",
-          padding: "2rem",
-        }}
-      >
+      <PillNav
+        items={navItems}
+        activeHref="/"
+        baseColor="#fff"
+        pillColor="#060010"
+        hoveredPillTextColor="#0fa4cdff"
+        pillTextColor="#fff"
+      />
+
+      <div style={{
+        position: "relative",
+        width: "100%",
+        minHeight: "100vh",
+        flexDirection: "column",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "hidden",
+        padding: "2rem",
+      }}>
         <BlurText
           text="Ideas, executed beautifully."
           style={{
@@ -66,15 +72,6 @@ function App() {
           }}
         />
       </div>
-
-      <PillNav
-        items={navItems}
-        activeHref="/"
-        baseColor="#fff"
-        pillColor="#060010"
-        hoveredPillTextColor="#0fa4cdff"
-        pillTextColor="#fff"
-      />
 
       <div style={{ paddingTop: "5rem", width: "100%" }}>
         <Routes>

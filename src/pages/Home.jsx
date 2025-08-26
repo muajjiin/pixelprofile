@@ -19,7 +19,7 @@ export default function Home() {
       <p>Welcome to my website!</p>
 
       {/* Add multiple sections to make the page scrollable */}
-      {Array.from({ length: 10 }).map((_, i) => (
+      {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}
           style={{

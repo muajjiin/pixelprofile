@@ -1,13 +1,16 @@
 // src/App.js
-import React from "react";
+import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Prism from "./components/Backgrounds/Prism/Prism";
 import BlurText from './components/text/BlurText/BlurText';
-import PillNav from './components/navbar/PillNav/PillNav'; // Import your navbar
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Portfolio from "./pages/Portfolio";
-import Contact from "./pages/Contact";
+import PillNav from './components/navbar/PillNav/PillNav';
+
+// Lazy load pages and Prism/LogoLoop
+const Home = React.lazy(() => import("./pages/Home"));
+const About = React.lazy(() => import("./pages/About"));
+const Portfolio = React.lazy(() => import("./pages/Portfolio"));
+const Contact = React.lazy(() => import("./pages/Contact"));
+const LogoLoop = React.lazy(() => import("./components/text/BlurText/LogoLoop"));
+const Prism = React.lazy(() => import("./components/Backgrounds/Prism/Prism"));
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -16,25 +19,27 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-
 function App() {
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-      {/* Prism background */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-          filter: "blur(16px)",
-          pointerEvents: "none"
-        }}
-      >
-        <Prism />
-      </div>
+      {/* Prism background (lazy loaded) */}
+      <Suspense fallback={<div style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1, background: "#222"}} />}>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: -1,
+            filter: "blur(16px)",
+            pointerEvents: "none"
+          }}
+        >
+          <Prism />
+        </div>
+      </Suspense>
+
       {/* Main content */}
       <div
         style={{
@@ -62,11 +67,7 @@ function App() {
         />
       </div>
 
-       <div className="App">
-    
-      </div>
       <PillNav
-        
         items={navItems}
         activeHref="/"
         baseColor="#fff"
@@ -82,6 +83,15 @@ function App() {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+      </div>
+
+      <div className="home-page">
+        <h1>Welcome to My Portfolio</h1>
+        {/* LogoLoop component */}
+        <Suspense fallback={<div>Loading Logo...</div>}>
+          <LogoLoop />
+        </Suspense>
+        {/* Other content */}
       </div>
     </div>
   );
